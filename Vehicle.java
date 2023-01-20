@@ -13,116 +13,100 @@
 public class Vehicle {
 
     /**
-     * This is the color.
-     */
-    private String color;
-
-    /**
-    * This is the maxSpeed.
-    */
-    private int maxSpeed;
-
-    /**
-     * This is the speed.
+     * Declare vehicle speed.
      */
     private int speed;
 
     /**
-     * This is the Vehicle Constructor.
+     * Declare the max vehicle speed.
+     */
+    private int maxSpeed;
+
+    /**
+     * Declare vehicle color.
+     */
+    private String color;
+
+    /**
+     * Vehicle Constructor - allows main to implement values for variables.
      *
-     * @param color The vehicles color.
-     * @param maxSpeed The vehicles max speed.
-     *
+     * @param maxSpeed - max speed achievable.
+     * @param color - color of the vehicle.
      */
     public Vehicle(
-        String color,
-        int maxSpeed) {
-        this.color = color;
+        int maxSpeed,
+        String color) {
         this.maxSpeed = maxSpeed;
+        this.color = color;
     }
 
     /**
-     * This is the status method.
-     */
-    public void status() {
-        System.out.println(" → Speed: " + this.speed);
-        System.out.println(" → Max Speed: " + this.maxSpeed);
-        System.out.println(" → Color: " + this.color);
-    }
-
-    /**
-     * This returns the color.
+     * GetColor() method - returns the current color value.
      *
-     * @return this returns the color.
+     * @return color
      */
     public String getColor() {
         return this.color;
     }
 
     /**
-     * This gets the color.
+     * SetColor() method - changes the color value.
      *
-     * @param newColor this is the new variable.
+     * @param colorInput - input from Main to replace color
      */
-    public void setColor(String newColor) {
-        this.color = newColor;
+    public void setColor(String colorInput) {
+        this.color = colorInput;
     }
 
     /**
-     * This sets the speed.
+     * GetSpeed() method - returns the current speed value.
      *
-     * @param newSpeed the new speed.
-     */
-    public void setSpeed(int newSpeed) {
-        this.speed = newSpeed;
-    }
-
-    /**
-     * This gets the speed.
-     *
-     * @return this returns the speed.
+     * @return speed
      */
     public int getSpeed() {
         return this.speed;
     }
 
     /**
-     * This gets the max speed.
+     * SetSpeed() method - changes the speed value.
      *
-     * @return this returns the max speed.
+     * @param speedInput - input to replace speed
+     */
+    public void setSpeed(int speedInput) {
+        this.speed = speedInput;
+    }
+
+    /**
+     * GetMaxSpeed() method - returns the current maxSpeed value.
+     *
+     * @return maxSpeed
      */
     public int getMaxSpeed() {
         return this.maxSpeed;
     }
+
     /**
-     * Acceleration function
-     * This calculates the acceleration speed.
+     * Accelerate() method - increases the speed of the vehicle.
      *
-     * @param accelerationPower this is the acceleration power.
-     * @param accelerationTime this is the acceleration time.
-     *
+     * @param accelPower - power of the acceleration
+     * @param accelTime - time to accelerate for
      */
-
-    public void accelerate(int accelerationPower, int accelerationTime) {
-        this.speed = (accelerationPower * accelerationTime) + this.speed;
-
-        if (speed > maxSpeed) {
-            this.speed = maxSpeed;
+    public void accelerate(int accelPower, int accelTime) {
+        this.speed += accelPower * accelTime;
+        if (!(this.speed < this.maxSpeed)) {
+            this.speed = this.maxSpeed;
         }
     }
 
     /**
-     * Breaking function
-     * This calculates the breaking speed.
+     * Braking() method - decreases the speed of the vehicle.
      *
-     * @param breakPower this is the breaking power.
-     * @param breakTime this is the break time.
-     *
+     * @param breakPower - power of the break
+     * @param breakTime - time to break for
      */
-    public void breaking(int breakPower, int breakTime) {
-        this.speed = this.speed - (breakPower * breakTime);
-
-        if (this.speed < 0) {
+    public void braking(int breakPower, int breakTime) {
+        this.speed -= breakPower * breakTime;
+        if (!(this.speed >= 0)) {
             this.speed = 0;
         }
     }

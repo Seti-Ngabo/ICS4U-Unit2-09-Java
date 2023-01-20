@@ -11,35 +11,18 @@
  * This is the main CarStatus Class.
  * Class CarStatus
  */
+
 final class Main {
-
     /**
-    * This is 10.
-    */
-    public static final int TEN = 10;
-
-    /**
-    * This is 15.
-    */
-    public static final int FIFTEEN = 15;
-
-    /**
-     * This is newSpeed.
+     * Prevent instantiation.
+     * Throw an exception IllegalStateException.
+     * if this ever is called
+     *
+     * @throws IllegalStateException
+     *
      */
-    public static final String NEWSPEED = "New speed: ";
-
-    /**
-    * Prevent instantiation.
-    * Throw an exception IllegalStateException.
-    * if this ever is called
-    *
-    * @throws IllegalStateException
-    *
-    */
-
     private Main() {
         throw new IllegalStateException("Cannot be instantiated");
-
     }
 
     /**
@@ -48,37 +31,59 @@ final class Main {
     * @param args No args will be used
     */
     public static void main(final String[] args) {
+        // Avoid "Magic Number" errors.
+        final int two = 2;
+        final int five = 5;
+        final int ten = 10;
+        final int fifteen = 15;
+        final int forty = 40;
+        final int twoHundred = 200;
 
-        final Bike bmx = new Bike("Red", 40);
-        System.out.println("Created Bmx bike.\nStatus:\n");
-        bmx.status();
+        // Create BMX bike.
+        System.out.println("Created BMX Bike.");
+        final Bike bmxBike = new Bike(forty, "Red");
 
-        System.out.println("\nSet the cadence to 10");
-        bmx.accelerate(TEN);
-        bmx.status();
+        System.out.println("Bike Status:");
+        bmxBike.status();
 
-        System.out.println("\nAccelerate By 15:");
-        bmx.accelerate(FIFTEEN);
-        bmx.status();
+        System.out.println("Set the cadence to 10:");
+        bmxBike.setCadence(ten);
+        bmxBike.accelerate(0);
+        bmxBike.status();
 
-        System.out.println("\nRing Bell.");
-        bmx.ringBell();
+        System.out.println("Accelerate by 15:");
+        bmxBike.accelerate(fifteen);
+        bmxBike.status();
 
-        final Truck bigTruck = new Truck("Grey", "HGC-3456F", 200);
-        System.out.println("\nCreated a Truck. \nStatus:\n");
-        bigTruck.status();
+        System.out.println("Braking, 5 of power for 2 seconds:");
+        bmxBike.braking(five, two);
+        bmxBike.status();
 
-        System.out.println("\nAccelerating, 10 of power for ten seconds:");
-        bigTruck.accelerate(TEN, TEN);
-        System.out.println(NEWSPEED + bigTruck.getSpeed());
+        System.out.println("Ring Bell:");
+        bmxBike.ringBell();
+        System.out.println("");
 
-        System.out.println("\nBreaking, 10 of power for 10 sec.");
-        bigTruck.accelerate(TEN, TEN);
-        System.out.println(NEWSPEED + bigTruck.getSpeed());
+        // Create Truck.
+        System.out.println("Created Truck.");
+        final Truck truckObj = new Truck(twoHundred, "Grey");
+        truckObj.setLicensePlate("HGC-3456F");
 
-        System.out.println("\nApplyed air pressure of 10:");
-        bigTruck.airBrake(TEN);
-        System.out.println(NEWSPEED + bigTruck.getSpeed());
+        System.out.println("Truck Status:");
+        truckObj.status();
+
+        System.out.println("Accelerating, 10 of power for 10 seconds:");
+        truckObj.accelerate(ten, ten);
+        System.out.println("\nNew speed (1): " + truckObj.getSpeed());
+        System.out.println("");
+
+        System.out.println("Set tire Air Pressure to 5:");
+        truckObj.setAirPressure(five);
+        System.out.println("\nNew Air Pressure: " + truckObj.getAirPressure());
+        System.out.println("");
+
+        System.out.println("Breaking, 10 of power for 2 seconds:");
+        truckObj.braking(ten, two);
+        System.out.println("\nNew speed (2): " + truckObj.getSpeed());
 
         System.out.println("\nDone.");
     }

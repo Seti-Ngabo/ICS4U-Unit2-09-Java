@@ -13,56 +13,85 @@
 public class Truck extends Vehicle {
 
     /**
-    * This is the license plate.
-    */
-    private String licensePlate;
+     * Declare licensePlate field.
+     */
+    private String licensePlate = "";
 
     /**
-     * This is the truck constructor.
-     *
-     * @param color this is the color.
-     * @param licensePlate this is the license plate.
-     * @param maxSpeed this is the max speed.
+     * Declare Air Pressure field.
      */
-    public Truck(String color, String licensePlate, int maxSpeed) {
-        super(color, maxSpeed);
-        this.licensePlate = licensePlate;
+    private int airPressure;
+
+    /**
+     * Truck Constructor - allows main to implement values for variables.
+     *
+     * @param maxSpeed - max speed achievable.
+     * @param color - color of the Truck.
+     */
+    public Truck(int maxSpeed, String color) {
+        super(maxSpeed, color);
     }
 
     /**
-     * This is the status method.
+     * Status() method - prints all current values.
      */
     public void status() {
-        super.status();
-        System.out.println(" → licensePlate: " + this.getLicensePlate());
+        System.out.println("");
+        System.out.println("    -> Speed: " + super.getSpeed());
+        System.out.println("    -> Max Speed: " + super.getMaxSpeed());
+        System.out.println("    -> Color: " + super.getColor());
+        System.out.println("    -> License Plate: " + this.licensePlate);
+        System.out.println("    -> Air Pressure: " + this.airPressure);
+        System.out.println("");
     }
 
     /**
-     * This returns the licensePlate.
+     * SetLicensePlate() method - changes the licensePlate value.
      *
-     * @return this returns the licensePlate.
+     * @param licensePlateInput - input to replace licensePlate.
+     */
+    public void setLicensePlate(String licensePlateInput) {
+        this.licensePlate = licensePlateInput;
+    }
+
+    /**
+     * GetLicensePlate() method - returns the current licensePlate value.
+     *
+     * @return licensePlate
      */
     public String getLicensePlate() {
         return this.licensePlate;
     }
 
     /**
-     * This sets the licensePlate.
+     * SetAirPressure() method - changes the airPressure value.
      *
-     * @param newLicensePlate this is the new variable.
+     * @param airPressureInput - input to replace airPressure.
      */
-    public void setLicensePlate(String newLicensePlate) {
-        this.licensePlate = newLicensePlate;
+    public void setAirPressure(int airPressureInput) {
+        this.airPressure = airPressureInput;
     }
 
     /**
-     * This is the air pressure breaking method.
+     * GetAirPressure() method - returns the current airPressure value.
      *
-     * @param airPressure this is the air pressure.
+     * @return airPressure
      */
-    public void airBrake(int airPressure) {
-        super.setSpeed(super.getSpeed() - airPressure / 2);
+    public int getAirPressure() {
+        return this.airPressure;
+    }
 
+    /**
+     * Braking() method - uses brakePower, brakeTime, and airProvided
+     * to reduce speed.
+     *
+     * @param brakePower - input that reduces speed based on power.
+     * @param brakeTime - input that reduces speed based on time.
+     */
+    public void braking(int brakePower, int brakeTime) {
+        super.setSpeed(
+            super.getSpeed() - brakePower * brakeTime
+            - this.airPressure * brakeTime);
         if (super.getSpeed() < 0) {
             super.setSpeed(0);
         }

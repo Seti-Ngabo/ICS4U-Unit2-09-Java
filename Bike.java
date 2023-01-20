@@ -13,52 +13,67 @@
 public class Bike extends Vehicle {
 
     /**
-     * This is the cadence.
+     * Declare cadence field.
      */
     private int cadence;
 
     /**
-     * This is the constructor for Bicycle.
+     * Bike Constructor - allows main to implement values for variables.
      *
-     * @param color this is the color.
-     * @param maxSpeed this is the maxSpeed.
-     *
+     * @param maxSpeed - max speed achievable.
+     * @param color - color of the bike.
      */
-    public Bike(String color, int maxSpeed) {
-        super(color, maxSpeed);
+    public Bike(int maxSpeed, String color) {
+        super(maxSpeed, color);
     }
 
     /**
-     * This sets the appliedPower.
-     *
-     * @param appliedPower this is the new variable.
-     */
-    public void accelerate(int appliedPower) {
-        this.cadence = this.cadence + appliedPower;
-        super.setSpeed(this.cadence * 2);
-    }
- 
-    /**
-     * This is the status method.
+     * Status() method - prints all current values.
      */
     public void status() {
-        super.status();
-        System.out.println(" → Cadence: " + this.cadence);
+        System.out.println("");
+        System.out.println("    -> Speed: " + super.getSpeed());
+        System.out.println("    -> Max Speed: " + super.getMaxSpeed());
+        System.out.println("    -> Color: " + super.getColor());
+        System.out.println("    -> Cadence: " + this.cadence);
+        System.out.println("");
     }
 
     /**
-     * This is the cadence.
+     * GetCadence() method - returns the current cadence value.
      *
-     * @return this returns the cadence.
+     * @return cadence
      */
     public int getCadence() {
         return this.cadence;
     }
 
     /**
-     * This is the ringbell.
+     * SetCadence() method - changes the cadence value.
+     *
+     * @param cadenceInput - input to replace cadence.
+     */
+    public void setCadence(int cadenceInput) {
+        this.cadence = cadenceInput;
+    }
+
+    /**
+     * Accelerate() method - polymorphism of super.accelerate() using cadence.
+     *
+     * @param appliedPower - power of the acceleration.
+     */
+    public void accelerate(int appliedPower) {
+        this.cadence += appliedPower;
+        super.setSpeed(this.cadence * 2);
+        if (super.getSpeed() > super.getMaxSpeed()) {
+            super.setSpeed(super.getMaxSpeed());
+        }
+    }
+
+    /**
+     * RingBell() method - prints "Ding Ding!".
      */
     public void ringBell() {
-        System.out.println("Ding ding!");
+        System.out.println("Ding Ding!");
     }
 }
